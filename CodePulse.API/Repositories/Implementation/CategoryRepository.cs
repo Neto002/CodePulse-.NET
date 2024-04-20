@@ -8,25 +8,59 @@ namespace CodePulse.API.Repositories.Implementation
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public CategoryRepository(ApplicationDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public async Task<Category> CreateAsync(Category category)
         {
 
-            await dbContext.Categories.AddAsync(category);
-            await dbContext.SaveChangesAsync();
+            await _dbContext.Categories.AddAsync(category);
+            await _dbContext.SaveChangesAsync();
 
             return category;
         }
 
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
-            return await dbContext.Categories.ToListAsync();
+            return await _dbContext.Categories.ToListAsync();
+        }
+
+        public async Task<Category?> GetById(Guid id)
+        {
+            return await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Category?> UpdateAsync(Category category)
+        {
+            var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == category.Id);
+
+            if (existingCategory == null)
+            {
+                return null;
+            }
+
+            _dbContext.Entry(existingCategory).CurrentValues.SetValues(category);
+            await _dbContext.SaveChangesAsync();
+            return category;
+        }
+
+        public async Task<Category?> DeleteAsync(Guid id)
+        {
+            var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingCategory == null)
+            {
+                return null;
+            }
+
+            _dbContext.Categories.Remove(existingCategory);
+            await _dbContext.SaveChangesAsync();
+
+            return existingCategory;
         }
     }
 }
