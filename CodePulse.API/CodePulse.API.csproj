@@ -16,4 +16,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="bin_old\Debug\net8.0\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="bin_old\Debug\net8.0\appsettings.json" />
+    <_ContentIncludedByDefault Remove="bin_old\Debug\net8.0\CodePulse.API.deps.json" />
+    <_ContentIncludedByDefault Remove="bin_old\Debug\net8.0\CodePulse.API.runtimeconfig.json" />
+  </ItemGroup>
+
 </Project>

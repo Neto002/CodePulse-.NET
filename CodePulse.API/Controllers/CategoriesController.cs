@@ -83,7 +83,7 @@ namespace CodePulse.API.Controllers
         {
             var existingCategory = await _categoryRepository.GetById(id);
 
-            if (existingCategory is null)
+            if (existingCategory == null)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace CodePulse.API.Controllers
 
             category = await _categoryRepository.UpdateAsync(category);
 
-            if (category is null)
+            if (category == null)
             {
                 return NotFound();
             }
@@ -134,7 +134,7 @@ namespace CodePulse.API.Controllers
         {
             var category = await _categoryRepository.DeleteAsync(id);
 
-            if (category is null)
+            if (category == null)
             {
                 return NotFound();
             }
