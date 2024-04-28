@@ -1,6 +1,6 @@
 namespace CodePulse.API.Models.DTO;
 
-public class UpdateCategoryRequestDTO
+public class UpdateCategoryRequestDto
 {
     public string Name { get; set; }
     public string UrlHandle { get; set; }

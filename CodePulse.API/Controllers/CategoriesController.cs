@@ -19,7 +19,7 @@ namespace CodePulse.API.Controllers
 
         // POST: https://localhost:7059/api/categories
         [HttpPost]
-        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDTO request)
+        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto request)
         {
             // Map DTO to Domain Model
 
@@ -32,7 +32,7 @@ namespace CodePulse.API.Controllers
             category = await _categoryRepository.CreateAsync(category);
 
             // Domain model to DTO
-            var response = new CategoryDTO
+            var response = new CategoryDto
             {
                 Id = category.Id,
                 Name = category.Name,
@@ -50,12 +50,12 @@ namespace CodePulse.API.Controllers
             var categories = await this._categoryRepository.GetAllAsync();
 
             // Map Domain model to DTO
-            var response = new List<CategoryDTO>();
+            var response = new List<CategoryDto>();
 
             // LINQ Expression
             categories.ToList().ForEach(category =>
             {
-                response.Add(new CategoryDTO
+                response.Add(new CategoryDto
                 {
                     Id = category.Id,
                     Name = category.Name,
@@ -88,7 +88,7 @@ namespace CodePulse.API.Controllers
                 return NotFound();
             }
 
-            var response = new CategoryDTO
+            var response = new CategoryDto
             {
                 Id = existingCategory.Id,
                 Name = existingCategory.Name,
@@ -101,7 +101,7 @@ namespace CodePulse.API.Controllers
         // PUT: https://localhost:7059/api/categories/{id}
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> EditCategory([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDTO request)
+        public async Task<IActionResult> EditCategory([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto request)
         {
             var category = new Category
             {
@@ -117,7 +117,7 @@ namespace CodePulse.API.Controllers
                 return NotFound();
             }
 
-            var response = new CategoryDTO
+            var response = new CategoryDto
             {
                 Id = category.Id,
                 Name = category.Name,
@@ -139,7 +139,7 @@ namespace CodePulse.API.Controllers
                 return NotFound();
             }
 
-            var response = new CategoryDTO
+            var response = new CategoryDto
             {
                 Id = category.Id,
                 Name = category.Name,

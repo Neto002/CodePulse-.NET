@@ -20,7 +20,7 @@ namespace CodePulse.API.Controllers
 
         // POST: {apiBaseUrl}/api/blogposts
         [HttpPost]
-        public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestDTO request)
+        public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestDto request)
         {
             var blogPost = new BlogPost
             {
@@ -48,7 +48,7 @@ namespace CodePulse.API.Controllers
 
             blogPost = await _blogPostRepository.CreateAsync(blogPost);
 
-            var response = new BlogPostDTO
+            var response = new BlogPostDto
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
@@ -59,7 +59,7 @@ namespace CodePulse.API.Controllers
                 PublishedDate = blogPost.PublishedDate,
                 Author = blogPost.Author,
                 IsVisible = blogPost.IsVisible,
-                Categories = blogPost.Categories.Select(category => new CategoryDTO
+                Categories = blogPost.Categories.Select(category => new CategoryDto
                 {
                     Id = category.Id,
                     Name = category.Name,
@@ -75,11 +75,11 @@ namespace CodePulse.API.Controllers
         public async Task<IActionResult> GetAllBlogPosts()
         {
             var blogPosts = await _blogPostRepository.GetAllAsync();
-            var response = new List<BlogPostDTO>();
+            var response = new List<BlogPostDto>();
 
             blogPosts.ToList().ForEach(blogPost =>
             {
-                response.Add(new BlogPostDTO
+                response.Add(new BlogPostDto
                 {
                     Id = blogPost.Id,
                     Title = blogPost.Title,
@@ -90,7 +90,7 @@ namespace CodePulse.API.Controllers
                     PublishedDate = blogPost.PublishedDate,
                     Author = blogPost.Author,
                     IsVisible = blogPost.IsVisible,
-                    Categories = blogPost.Categories.Select(category => new CategoryDTO
+                    Categories = blogPost.Categories.Select(category => new CategoryDto
                     {
                         Id = category.Id,
                         Name = category.Name,
@@ -113,7 +113,7 @@ namespace CodePulse.API.Controllers
                 return NotFound();
             }
 
-            var response = new BlogPostDTO
+            var response = new BlogPostDto
             {
                 Id = existingBlogPost.Id,
                 Title = existingBlogPost.Title,
@@ -124,7 +124,7 @@ namespace CodePulse.API.Controllers
                 PublishedDate = existingBlogPost.PublishedDate,
                 Author = existingBlogPost.Author,
                 IsVisible = existingBlogPost.IsVisible,
-                Categories = existingBlogPost.Categories.Select(category => new CategoryDTO
+                Categories = existingBlogPost.Categories.Select(category => new CategoryDto
                 {
                     Id = category.Id,
                     Name = category.Name,
@@ -139,7 +139,7 @@ namespace CodePulse.API.Controllers
         [HttpPut]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateBlogPostById([FromRoute] Guid id,
-            [FromBody] UpdateBlogPostRequestDTO request)
+            [FromBody] UpdateBlogPostRequestDto request)
         {
 
             // Convert from DTO to Model
@@ -177,7 +177,7 @@ namespace CodePulse.API.Controllers
             }
 
             // Convert Model to DTO
-            var response = new BlogPostDTO
+            var response = new BlogPostDto
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
@@ -188,7 +188,7 @@ namespace CodePulse.API.Controllers
                 PublishedDate = blogPost.PublishedDate,
                 Author = blogPost.Author,
                 IsVisible = blogPost.IsVisible,
-                Categories = blogPost.Categories.Select(category => new CategoryDTO
+                Categories = blogPost.Categories.Select(category => new CategoryDto
                 {
                     Id = category.Id,
                     Name = category.Name,
@@ -212,7 +212,7 @@ namespace CodePulse.API.Controllers
             }
 
             // Convert Model to DTO
-            var response = new BlogPostDTO
+            var response = new BlogPostDto
             {
                 Id = deletedBlogPost.Id,
                 Title = deletedBlogPost.Title,

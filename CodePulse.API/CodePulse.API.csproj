@@ -23,4 +23,8 @@
     <_ContentIncludedByDefault Remove="bin_old\Debug\net8.0\CodePulse.API.runtimeconfig.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>
