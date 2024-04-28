@@ -101,6 +101,7 @@ namespace CodePulse.API.Controllers
 
             return Ok(response);
         }
+
         // GET: {apiBaseUrl}/api/blogposts/{id}
         [HttpGet]
         [Route("{id:Guid}")]
@@ -113,6 +114,42 @@ namespace CodePulse.API.Controllers
                 return NotFound();
             }
 
+            var response = new BlogPostDto
+            {
+                Id = existingBlogPost.Id,
+                Title = existingBlogPost.Title,
+                ShortDescription = existingBlogPost.ShortDescription,
+                Content = existingBlogPost.Content,
+                FeaturedImageUrl = existingBlogPost.FeaturedImageUrl,
+                UrlHandle = existingBlogPost.UrlHandle,
+                PublishedDate = existingBlogPost.PublishedDate,
+                Author = existingBlogPost.Author,
+                IsVisible = existingBlogPost.IsVisible,
+                Categories = existingBlogPost.Categories.Select(category => new CategoryDto
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle
+                }).ToList()
+            };
+
+            return Ok(response);
+        }
+
+        // GET: {apiBaseUrl}/api/blogposts/{urlHandle}
+        [HttpGet]
+        [Route("{urlHandle}")]
+        public async Task<IActionResult> GetBlogPostByUrlHandle([FromRoute] string urlHandle)
+        {
+            // Get blogpost details from repository
+            var existingBlogPost = await _blogPostRepository.GetByUrlHandleAsync(urlHandle);
+
+            if (existingBlogPost == null)
+            {
+                return NotFound();
+            }
+
+            // Convert Model to DTO
             var response = new BlogPostDto
             {
                 Id = existingBlogPost.Id,
