@@ -34,7 +34,7 @@ namespace CodePulse.API.Migrations
 
                     b.HasIndex("CategoriesId");
 
-                    b.ToTable("BlogPostCategory");
+                    b.ToTable("BlogPostCategory", (string)null);
                 });
 
             modelBuilder.Entity("CodePulse.API.Models.Domain.BlogImage", b =>
@@ -64,7 +64,7 @@ namespace CodePulse.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogImages");
+                    b.ToTable("BlogImages", (string)null);
                 });
 
             modelBuilder.Entity("CodePulse.API.Models.Domain.BlogPost", b =>
@@ -105,7 +105,7 @@ namespace CodePulse.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("BlogPosts", (string)null);
                 });
 
             modelBuilder.Entity("CodePulse.API.Models.Domain.Category", b =>
@@ -124,7 +124,7 @@ namespace CodePulse.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("BlogPostCategory", b =>
